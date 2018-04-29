@@ -15,7 +15,7 @@ class Choice(models.Model):
     # data type = Poll primary key?
     # re: `related_name`, when using ORM API will be able to use `choices`
     # instead of `choice_set`
-    poll_id = models.ForeignKey(Poll, related_name='choices', on_delete=models.CASCADE)
+    poll_id = models.ForeignKey(Poll, on_delete=models.CASCADE)
     text = models.CharField(max_length=100)
 
     def __str__(self):
@@ -23,7 +23,7 @@ class Choice(models.Model):
 
 
 class Vote(models.Model):
-    choice_id = models.ForeignKey(Choice, related_name='votes', on_delete=models.CASCADE)
+    choice_id = models.ForeignKey(Choice, on_delete=models.CASCADE)
     poll_id = models.ForeignKey(Poll, on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
