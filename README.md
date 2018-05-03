@@ -1,0 +1,1 @@
+following along (mostly) with tutorial by [Agiliq](https://books.agiliq.com/projects/django-api-polls-tutorial/en/latest/) on [Django Rest Framework](http://www.django-rest-framework.org/)
