@@ -8,18 +8,15 @@ class Poll(models.Model):
     pub_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.question
+        return self.text
 
 
 class Choice(models.Model):
-    # data type = Poll primary key?
-    # re: `related_name`, when using ORM API will be able to use `choices`
-    # instead of `choice_set`
     poll_id = models.ForeignKey(Poll, on_delete=models.CASCADE)
     text = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.choice_text
+        return self.text
 
 
 class Vote(models.Model):
@@ -30,3 +27,6 @@ class Vote(models.Model):
     class Meta:
         # meaning there can only be one record with this pairing of poll and user
         unique_together = ("poll_id", "user_id")
+
+    def __str__(self):
+        return '{} {} {}'.format(self.choice_id, self.poll_id, self.user_id)
