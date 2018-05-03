@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import polls_detail, polls_list
+from .views_drf import PollList, PollDetail
 
 urlpatterns = [
-    path('polls/', polls_list, name='polls list'),
-    path('polls/<int:pk>', polls_detail, name='polls detail')
+    path('polls/', PollList.as_view(), name='polls list'),
+    path('polls/<int:pk>', PollDetail.as_view(), name='polls detail')
 ]

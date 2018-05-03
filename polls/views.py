@@ -1,4 +1,4 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from polls.models import Poll
 
@@ -10,6 +10,7 @@ def polls_list(request):
 
 # JsonResponse = HttpResponse w/ content-type = JSON
 # accessing related obj notation (`user_id__username` vs. `user_id.username`)
+
 
 def polls_detail(request, pk):
     poll = get_object_or_404(Poll, pk=pk)
