@@ -15,7 +15,9 @@ class PollDetail(generics.RetrieveDestroyAPIView):
 
 
 class ChoiceList(generics.ListCreateAPIView):
-        queryset = Choice.objects.all()
+        def get_queryset(self):
+                queryset = Choice.objects.filter(poll_id=self.kwargs["pk"])
+                return queryset
         serializer_class = ChoiceSerializer
 
 
