@@ -18,6 +18,7 @@ class ChoiceSerializer(serializers.ModelSerializer):
 
 class PollSerializer(serializers.ModelSerializer):
     choices = ChoiceSerializer(many=True, read_only=True, required=False)
+    # TODO: OPTIONS method against this to see how
 
     class Meta:
         model = Poll
