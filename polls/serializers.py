@@ -9,7 +9,8 @@ class VoteSerializer(serializers.ModelSerializer):
 
 
 class ChoiceSerializer(serializers.ModelSerializer):
-    votes = VoteSerializer(many=True, required=False)
+    # TODO: `read_only` should not be necessary here per the tutorial
+    votes = VoteSerializer(many=True, read_only=True, required=False)
 
     class Meta:
         model = Choice
@@ -17,8 +18,8 @@ class ChoiceSerializer(serializers.ModelSerializer):
 
 
 class PollSerializer(serializers.ModelSerializer):
+    # TODO: OPTIONS method against this to see relationships
     choices = ChoiceSerializer(many=True, read_only=True, required=False)
-    # TODO: OPTIONS method against this to see how
 
     class Meta:
         model = Poll

@@ -12,7 +12,10 @@ class Poll(models.Model):
 
 
 class Choice(models.Model):
-    poll_id = models.ForeignKey(Poll, on_delete=models.CASCADE)
+    # TODO: if no `related_name`, Choice and Vote won't associate themselves with Poll; why?
+    # workaround is add `read_only=True` to serializers, which allows simple POST
+    # but still loses association
+    poll_id = models.ForeignKey(Poll, related_name='choices', on_delete=models.CASCADE)
     text = models.CharField(max_length=100)
 
     def __str__(self):
@@ -20,7 +23,7 @@ class Choice(models.Model):
 
 
 class Vote(models.Model):
-    choice_id = models.ForeignKey(Choice, on_delete=models.CASCADE)
+    choice_id = models.ForeignKey(Choice, related_name='votes', on_delete=models.CASCADE)
     poll_id = models.ForeignKey(Poll, on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -28,5 +31,5 @@ class Vote(models.Model):
         # meaning there can only be one record with this pairing of poll and user
         unique_together = ("poll_id", "user_id")
 
-    def __str__(self):
-        return '{} {} {}'.format(self.choice_id, self.poll_id, self.user_id)
+    # def __str__(self):
+    #     return '{} {} {}'.format(self.choice_id, self.poll_id, self.user_id)
